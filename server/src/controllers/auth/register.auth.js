@@ -1,4 +1,4 @@
-const User = require("../../models/distributor.model");
+const User = require("../../models/user.model.js");
 const { hash } = require("bcrypt");
 const registerAuth = async (req, res) => {
       try {

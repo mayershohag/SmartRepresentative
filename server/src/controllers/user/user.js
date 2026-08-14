@@ -1,4 +1,4 @@
-const User = require("../../models/distributor.model");
+const User = require("../../models/user.model.js");
 const userController = async (req, res) => {
       try {
             const phone = req.params.phone;

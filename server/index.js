@@ -8,6 +8,7 @@ const userRouter = require("./src/routes/users.routes");
 const companyRouter = require("./src/routes/company.routes");
 const productRouter = require("./src/routes/product.routes");
 const categoryRouter = require("./src/routes/category.routes");
+const distributorRouter = require("./src/routes/distributor.routes");
 const app = express();
 
 // middlewares
@@ -18,6 +19,7 @@ app.use("/api/users", userRouter);
 app.use("/api/company", companyRouter);
 app.use("/api/products", productRouter);
 app.use("/api/category", categoryRouter);
+app.use("/api/distributor-products", distributorRouter);
 
 // configuration
 dotenv.config();
