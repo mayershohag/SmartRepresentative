@@ -6,11 +6,14 @@ const getCompanies = require("../controllers/company/getCompanies");
 const getCompany = require("../controllers/company/getCompany");
 const updateCompany = require("../controllers/company/updateCompany");
 const deleteCompany = require("../controllers/company/deleteCompany");
+const authValidator = require("../middlewares/common/authValidator");
+const roleChecker = require("../middlewares/common/roleChecker");
 
-companyRouter.post("/", createCompany);
-companyRouter.get("/", getCompanies);
-companyRouter.get("/:name", getCompany);
-companyRouter.put("/:name", updateCompany);
-companyRouter.delete("/:name", deleteCompany);
+
+companyRouter.post("/", authValidator, roleChecker, createCompany);
+companyRouter.get("/", authValidator, roleChecker, getCompanies);
+companyRouter.get("/:name", authValidator, roleChecker, getCompany);
+companyRouter.put("/:name", authValidator, roleChecker, updateCompany);
+companyRouter.delete("/:name", authValidator, roleChecker, deleteCompany);
 
 module.exports = companyRouter;

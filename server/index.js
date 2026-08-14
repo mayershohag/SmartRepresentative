@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cookie = require("cookie-parser")
 const authRouter = require("./src/routes/auth.routes");
 const userRouter = require("./src/routes/users.routes");
 const companyRouter = require("./src/routes/company.routes");
@@ -11,6 +12,7 @@ const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(cookie())
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/company", companyRouter);
