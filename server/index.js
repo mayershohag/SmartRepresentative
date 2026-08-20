@@ -41,7 +41,16 @@ mongoose
 app.get("/", (req, res) => {
       res.status(200).json({
             success: true,
-            message: "server is running..."
+            message: "server is running...",
+            timestamp: new Date().toISOString(),
+            routes: {
+                  auth: "/api/auth",
+                  users: "/api/users",
+                  company: "/api/company",
+                  products: "/api/products",
+                  category: "/api/category",
+                  distributorProducts: "/api/distributor-products",
+            }
       })
 });
 
