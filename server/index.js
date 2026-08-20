@@ -39,7 +39,10 @@ mongoose
       });
 
 app.get("/", (req, res) => {
-      res.send(`hello postman`);
+      res.status(200).json({
+            success: true,
+            message: "server is running..."
+      })
 });
 
 // listening port
