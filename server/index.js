@@ -13,6 +13,9 @@ const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(express.urlencoded())
+app.use(express.text())
+app.use(express.raw())
 app.use(cookie())
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

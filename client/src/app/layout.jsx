@@ -18,7 +18,7 @@ export const metadata = {
      description:
           "The App which is works as a Representative of yours in your constituence",
      icons: {
-          icon: "/fevicon.jpg",
+          icon: "/logo/logo.svg",
      },
 };
 
@@ -29,11 +29,11 @@ export default function RootLayout({ children }) {
                className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
           >
                <body className="min-h-full grid grid-cols-12 grid-rows-auto">
-                    <div className="col-span-2">
+                    <div className="hidden sm:block sm:col-span-2">
                          <Sidebar />
                     </div>
 
-                    <div className="col-span-10">
+                    <div className="col-span-12 sm:col-span-10">
                          <Header />
                          {children}
                     </div>
