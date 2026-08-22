@@ -348,8 +348,6 @@ export default function DistributionRegister({ onSubmit }) {
                          required
                     />
 
-                    {/* Distributor-only fields — required only when role === "distributor",
-            exactly matching the schema's conditional `required` functions. */}
                     {isDistributor && (
                          <>
                               <TextField
