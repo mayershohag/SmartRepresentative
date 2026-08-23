@@ -1,11 +1,12 @@
-export async function addUser(userData) {
+export async function loginUser(credentials) {
       try {
-            const res = await fetch(`https://smartrepresentative.onrender.com/api/auth/register`, {
+            const res = await fetch(`https://smartrepresentative.onrender.com/api/auth/login`, {
                   method: "POST",
                   headers: {
                         "Content-Type": "application/json",
                   },
-                  body: JSON.stringify(userData)
+                  credentials: "include",
+                  body: JSON.stringify(credentials)
             });
 
             const data = await res.json();
@@ -15,7 +16,7 @@ export async function addUser(userData) {
                   data,
             };
       } catch (error) {
-            console.error("Error adding user:", error);
+            console.error("Error logging in:", error);
             throw error;
       }
 }

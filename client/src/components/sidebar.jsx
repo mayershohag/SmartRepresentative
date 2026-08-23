@@ -23,11 +23,19 @@ import {
      ShoppingCart,
 } from "lucide-react";
 import Link from "next/link";
+import Logout from "@/apis/logout";
 
 const NAV_SECTIONS = [
      {
           label: "Overview",
-          items: [{ id: "dashboard", label: "Dashboard", icon: LayoutGrid }],
+          items: [
+               {
+                    id: "dashboard",
+                    label: "Dashboard",
+                    icon: LayoutGrid,
+                    href: "/",
+               },
+          ],
      },
      {
           label: "Catalog",
@@ -515,7 +523,7 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
                          <button
                               type="button"
                               onClick={handleCollapseToggle}
-                              className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
+                              className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
                                    collapsed ? "justify-center px-0" : ""
                               }`}
                               style={{ color: "var(--text-secondary)" }}
@@ -542,7 +550,8 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
 
                          <button
                               type="button"
-                              className={`mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
+                              onClick={Logout}
+                              className={`mt-1 flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
                                    collapsed ? "justify-center px-0" : ""
                               }`}
                               style={{ color: "var(--text-secondary)" }}
