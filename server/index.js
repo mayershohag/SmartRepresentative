@@ -3,13 +3,27 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookie = require("cookie-parser")
+const cors = require("cors")
+
 const authRouter = require("./src/routes/auth.routes");
 const userRouter = require("./src/routes/users.routes");
 const companyRouter = require("./src/routes/company.routes");
 const productRouter = require("./src/routes/product.routes");
 const categoryRouter = require("./src/routes/category.routes");
 const distributorRouter = require("./src/routes/distributor.routes");
+
 const app = express();
+
+// CORS
+app.use(
+      cors({
+            origin: [
+                  "http://localhost:3000",
+                  "https://smartrepresentative.vercel.app/",
+            ],
+            credentials: true,
+      })
+);
 
 // middlewares
 app.use(express.json());
@@ -17,6 +31,8 @@ app.use(express.urlencoded())
 app.use(express.text())
 app.use(express.raw())
 app.use(cookie())
+
+// routes 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/company", companyRouter);
@@ -31,7 +47,7 @@ const config = {
       uri: process.env.DB_URI,
 };
 
-// databse connections
+// database connections
 mongoose
       .connect(config.uri)
       .then(() => {

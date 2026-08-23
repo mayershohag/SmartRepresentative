@@ -5,8 +5,7 @@ export async function addUser(userData) {
                   headers: {
                         "Content-Type": "application/json",
                   },
-                  body: JSON.stringify(userData),
-                  credentials: "include",
+                  body: JSON.stringify(userData)
             });
 
             const data = await res.json();
