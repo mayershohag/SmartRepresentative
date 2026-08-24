@@ -6,7 +6,6 @@ export async function addCompany(companyData) {
                         "Content-Type": "application/json",
                   },
                   body: JSON.stringify(companyData),
-                  credentials: "include",
             });
 
             const data = await res.json();

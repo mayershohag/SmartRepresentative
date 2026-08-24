@@ -169,9 +169,10 @@ export default function Login() {
                     window.localStorage.removeItem(REMEMBER_KEY);
                }
 
-               setStatus({ type: "ok", message: "Signed in. Redirecting…" });
+               setStatus({ type: "ok", message: "Loggin in. Redirecting…" });
                setForm((prev) => ({ ...prev, password: "" }));
-               setTimeout(() => navigate.push("/"), 1200);
+               setTimeout(() => navigate.push("/auth/profile"), 1200);
+               console.log(`login successfully!`);
           } catch (err) {
                setStatus({
                     type: "error",

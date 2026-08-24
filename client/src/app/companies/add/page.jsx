@@ -45,11 +45,7 @@ export default function AddCompany() {
      const handleChange = (e) => {
           const { name, value } = e.target;
           setFormData((prev) => ({ ...prev, [name]: value }));
-
-          // Clear API errors when typing
           if (apiError) setApiError("");
-
-          // Immediate validation if the field has been touched
           if (touched[name]) {
                validateField(name, value);
           }
@@ -76,7 +72,6 @@ export default function AddCompany() {
                if (!value.trim()) {
                     errorMsg = "Phone number is required";
                } else {
-                    // Phone regex: matches basic international format (10-15 digits)
                     const phoneRegex = /^\+?[0-9\s-]{10,15}$/;
                     if (!phoneRegex.test(value.trim())) {
                          errorMsg =
@@ -155,7 +150,6 @@ export default function AddCompany() {
           return Object.keys(newErrors).length === 0;
      };
 
-     // Handle redirect countdown on success
      useEffect(() => {
           let timer;
           if (success && countdown > 0) {
@@ -168,7 +162,6 @@ export default function AddCompany() {
           return () => clearTimeout(timer);
      }, [success, countdown, router]);
 
-     // Submit form
      const handleSubmit = async (e) => {
           e.preventDefault();
           setApiError("");
@@ -199,7 +192,6 @@ export default function AddCompany() {
                          "Failed to create company. Please check your data.";
                     setApiError(errorMsg);
 
-                    // Focus on potential conflict fields if the error specifies "exists"
                     if (errorMsg.toLowerCase().includes("exists")) {
                          if (
                               errorMsg.toLowerCase().includes("company") ||
@@ -377,6 +369,7 @@ export default function AddCompany() {
 
                               <form
                                    onSubmit={handleSubmit}
+                                   method="POST"
                                    className="space-y-6"
                               >
                                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -426,8 +419,8 @@ export default function AddCompany() {
                                                             className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border transition-all duration-200 ${
                                                                  touched.name &&
                                                                  errors.name
-                                                                      ? "border-(--danger) focus:border-(--danger) focus:ring-1 focus:ring-(--danger)"
-                                                                      : "border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet)"
+                                                                      ? " focus:border-(--danger) focus:ring-1 focus:ring-(--danger)"
+                                                                      : "focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet)"
                                                             }`}
                                                        />
                                                   </div>

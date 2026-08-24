@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
+import { AuthProvider } from "@/context/authContext";
 
 const geistSans = Geist({
      variable: "--font-geist-sans",
@@ -29,14 +30,16 @@ export default function RootLayout({ children }) {
                className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
           >
                <body className="min-h-full grid grid-cols-12 grid-rows-auto">
-                    <div className="hidden sm:block sm:col-span-2">
-                         <Sidebar />
-                    </div>
+                    <AuthProvider>
+                         <div className="hidden sm:block sm:col-span-2">
+                              <Sidebar />
+                         </div>
 
-                    <div className="col-span-12 sm:col-span-10">
-                         <Header />
-                         {children}
-                    </div>
+                         <div className="col-span-12 sm:col-span-10">
+                              <Header />
+                              {children}
+                         </div>
+                    </AuthProvider>
                </body>
           </html>
      );
