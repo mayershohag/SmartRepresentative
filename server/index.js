@@ -2,7 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const cookie = require("cookie-parser")
+const cookieParser = require("cookie-parser")
 const cors = require("cors")
 
 const authRouter = require("./src/routes/auth.routes");
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded())
 app.use(express.text())
 app.use(express.raw())
-app.use(cookie())
+app.use(cookieParser())
 
 // routes 
 app.use("/api/auth", authRouter);
