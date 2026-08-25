@@ -19,7 +19,7 @@ app.use(
       cors({
             origin: [
                   "http://localhost:3000",
-                  "https://smartrepresentative.vercel.app/",
+                  "https://smartrepresentative.vercel.app",
             ],
             credentials: true,
       })
