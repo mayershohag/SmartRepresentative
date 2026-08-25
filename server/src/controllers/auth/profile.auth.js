@@ -1,17 +1,10 @@
-const jwt = require("jsonwebtoken")
 const User = require('../../models/user.model')
-const getProfile = async (req, res) => {
-      const token = req.cookies?.token;
 
-      if (!token) {
-            return res.status(401).json({
-                  success: false,
-                  message: "Unauthorized",
-            });
-      }
+// authValidator has already verified the cookie and put the decoded token
+// payload on req.user by the time this runs.
+const getProfile = async (req, res) => {
       try {
-            const decoded = await jwt.verify(token, process.env.JWT_KEY)
-            const user = await User.findById(decoded.userId).select('-password')
+            const user = await User.findById(req.user.userId).select('-password')
 
             if (!user) {
                   return res.status(404).json({

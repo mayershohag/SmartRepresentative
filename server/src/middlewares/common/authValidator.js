@@ -1,27 +1,19 @@
 const jwt = require("jsonwebtoken");
 
 const authValidator = async (req, res, next) => {
+      const token = req.cookies?.token;
+      if (!token) {
+            return res.status(401).json({
+                  success: false,
+                  message: "Unauthorized. Please login first."
+            })
+      }
       try {
-            const token = req.cookies.token
-            if (!token) {
-                  return res.status(401).json({
-                        success: false,
-                        message: "Unauthorized. Please login first."
-                  })
-            }
-            const decode = jwt.verify(token, process.env.JWT_KEY);
-            if (!decode) {
-                  return res.status(401).json({
-                        success: false,
-                        message: "Invalid or expired access token!"
-                  })
-            }
-            req.user = decode;
+            req.user = jwt.verify(token, process.env.JWT_KEY);
             next()
       }
       catch (err) {
-            console.log(err)
-            res.status(500).json({
+            res.status(401).json({
                   success: false,
                   message: "Invalid or expired access token!"
             })

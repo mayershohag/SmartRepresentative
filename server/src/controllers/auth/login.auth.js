@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/user.model.js");
+const { cookieOptions, TOKEN_MAX_AGE_MS } = require("../../utils/cookie.js");
 const dotenv = require("dotenv");
 
 dotenv.config();
 const config = {
       secret_key: process.env.JWT_KEY,
       expires: process.env.JWT_EXPIRES_IN,
-      secure: process.env.NODE_ENV,
 };
 
 const loginAuth = async (req, res) => {
@@ -51,9 +51,8 @@ const loginAuth = async (req, res) => {
             user.password = undefined;
 
             res.cookie("token", token, {
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: true,
+                  ...cookieOptions,
+                  maxAge: TOKEN_MAX_AGE_MS,
             });
             res.status(200).json({
                   success: true,
