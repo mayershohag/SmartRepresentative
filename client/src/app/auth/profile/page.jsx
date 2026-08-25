@@ -9,16 +9,13 @@ export default function Profile() {
 
      useEffect(() => {
           if (!loading && !isLoggedIn) {
-               //    router.push("/auth/login");
-               console.log(`failed to login`);
-               console.log(loading);
-               console.log(isLoggedIn);
+               router.replace("/auth/login");
           }
      }, [loading, isLoggedIn, router]);
 
-     if (loading) return <p>Loading...</p>;
-     if (!isLoggedIn) return null;
-     console.log(user);
+     if (loading) return <p className="p-6 text-white">Loading...</p>;
+     if (!isLoggedIn)
+          return <p className="p-6 text-white">Redirecting to login...</p>;
 
      return (
           <div className="min-h-full p-6 text-white">

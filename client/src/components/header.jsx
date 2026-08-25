@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Bell, ChevronDown, Plus, CircleUserRound } from "lucide-react";
+import { Search, Bell, ChevronDown, Plus } from "lucide-react";
+import Link from "next/link";
+import { useAuth } from "@/context/authContext";
 
 const PAGE_META = {
      dashboard: {
@@ -40,12 +42,14 @@ const PAGE_META = {
 export default function Header({ activeId = "dashboard", distributor }) {
      const [notifOpen, setNotifOpen] = useState(false);
      const meta = PAGE_META[activeId] ?? PAGE_META.dashboard;
+     const { user } = useAuth();
 
      const person = distributor ?? {
-          name: "Rafiq Distribution House",
-          role: "Distributor",
-          district: "Dhaka",
-          avatarInitials: "RD",
+          ...user,
+          name: user?.name || "Name",
+          role: user?.role || "Role",
+          district: user?.district || "District",
+          avatarInitials: user?.avatarInitials || "A",
      };
 
      const notifications = [
@@ -105,13 +109,14 @@ export default function Header({ activeId = "dashboard", distributor }) {
                     </div>
 
                     {/* Quick add */}
-                    <button
+                    <Link
+                         href="/products/add"
                          className="hidden items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.98] lg:flex"
                          style={{ background: "var(--thread)" }}
                     >
                          <Plus size={16} strokeWidth={2.5} />
                          New Product
-                    </button>
+                    </Link>
 
                     {/* Notifications */}
                     <div className="relative">
@@ -126,7 +131,7 @@ export default function Header({ activeId = "dashboard", distributor }) {
                          >
                               <Bell
                                    size={17}
-                                   className="text-[var(--text-secondary)]"
+                                   className="text-(--text-secondary)"
                                    strokeWidth={2}
                               />
                               <span
@@ -139,10 +144,10 @@ export default function Header({ activeId = "dashboard", distributor }) {
 
                          {notifOpen && (
                               <div
-                                   className="glass-panel absolute right-0 top-12 w-[300px] rounded-2xl p-2 shadow-2xl"
+                                   className="glass-panel absolute right-0 top-12 w-75 rounded-2xl p-2 shadow-2xl"
                                    style={{ background: "rgba(21,15,38,0.97)" }}
                               >
-                                   <p className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-tertiary)]">
+                                   <p className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-(--text-tertiary)">
                                         Notifications
                                    </p>
                                    <div className="flex flex-col gap-1">
@@ -162,10 +167,10 @@ export default function Header({ activeId = "dashboard", distributor }) {
                                                        }}
                                                   />
                                                   <div className="min-w-0">
-                                                       <p className="text-[12.5px] leading-snug text-[var(--text-primary)]">
+                                                       <p className="text-[12.5px] leading-snug text-(--text-primary)">
                                                             {n.text}
                                                        </p>
-                                                       <p className="mt-0.5 text-[11px] text-[var(--text-tertiary)]">
+                                                       <p className="mt-0.5 text-[11px] text-(--text-tertiary)">
                                                             {n.time}
                                                        </p>
                                                   </div>
@@ -177,7 +182,8 @@ export default function Header({ activeId = "dashboard", distributor }) {
                     </div>
 
                     {/* Profile */}
-                    <button
+                    <Link
+                         href="/auth/profile"
                          className="flex items-center gap-2.5 rounded-xl py-1.5 pl-1.5 pr-3 transition-colors hover:bg-white/5"
                          style={{ border: "1px solid var(--glass-border)" }}
                     >
@@ -188,18 +194,18 @@ export default function Header({ activeId = "dashboard", distributor }) {
                               {person.avatarInitials}
                          </div>
                          <div className="hidden text-left sm:block">
-                              <p className="text-[12.5px] font-semibold leading-none text-[var(--text-primary)]">
+                              <p className="text-[12.5px] font-semibold leading-none text-(--text-primary)">
                                    {person.name}
                               </p>
-                              <p className="mt-1 text-[11px] leading-none text-[var(--text-tertiary)]">
+                              <p className="mt-1 text-[11px] leading-none text-(--text-tertiary)">
                                    {person.role} · {person.district}
                               </p>
                          </div>
                          <ChevronDown
                               size={14}
-                              className="hidden text-[var(--text-tertiary)] sm:block"
+                              className="hidden text-(--text-tertiary) sm:block"
                          />
-                    </button>
+                    </Link>
                </div>
           </header>
      );

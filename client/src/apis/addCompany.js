@@ -1,11 +1,12 @@
 export async function addCompany(companyData) {
       try {
-            const res = await fetch(`https://smartrepresentative.onrender.com/api/company`, {
+            const res = await fetch(`/api/company`, {
                   method: "POST",
                   headers: {
                         "Content-Type": "application/json",
                   },
                   body: JSON.stringify(companyData),
+                  credentials: "include",
             });
 
             const data = await res.json();

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Logout from "@/apis/logout";
+import { useRouter } from "next/navigation";
 
 const NAV_SECTIONS = [
      {
@@ -428,6 +429,7 @@ function NavItem({ item, collapsed, activeId, onNavigate, openId, setOpenId }) {
 export default function Sidebar({ activeId = "dashboard", onNavigate }) {
      const [collapsed, setCollapsed] = useState(false);
      const [openId, setOpenId] = useState(null);
+     const router = useRouter();
 
      const handleCollapseToggle = () => {
           setCollapsed((prev) => !prev);
@@ -550,7 +552,7 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
 
                          <button
                               type="button"
-                              onClick={Logout}
+                              onClick={() => Logout(router)}
                               className={`mt-1 flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
                                    collapsed ? "justify-center px-0" : ""
                               }`}

@@ -1,7 +1,7 @@
 
 export async function addProduct(productData) {
       try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_BASE_URL}/api/products`, {
+            const res = await fetch(`/api/products`, {
                   method: "POST",
                   headers: {
                         "Content-Type": "application/json",

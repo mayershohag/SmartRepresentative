@@ -1,37 +1,41 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext } from "react";
-
+import { useState, useEffect, useCallback, createContext, useContext } from "react";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
       const [user, setUser] = useState(null);
       const [loading, setLoading] = useState(true);
 
-      useEffect(() => {
-            async function checkAuth() {
-                  try {
-                        const res = await fetch("https://smartrepresentative.onrender.com/api/auth/profile", {
-                              credentials: "include"
-                        });
+      const checkAuth = useCallback(async () => {
+            try {
+                  const res = await fetch("/api/auth/profile", {
+                        method: "GET",
+                        credentials: "include"
+                  });
 
-                        if (res.ok) {
-                              const data = await res.json();
-                              setUser(data.user);
-                        } else {
-                              setUser(null);
-                        }
-                  } catch {
+                  if (res.ok) {
+                        const data = await res.json();
+                        setUser(data.user);
+                        return true
+                  } else {
                         setUser(null);
-                  } finally {
-                        setLoading(false);
+                        return false
                   }
+            } catch {
+                  setUser(null);
+                  return false
+            } finally {
+                  setLoading(false);
             }
+      }, [])
+
+      useEffect(() => {
             checkAuth();
-      }, []);
+      }, [checkAuth]);
 
       return (
-            <AuthContext.Provider value={{ user, loading, isLoggedIn: Boolean(user) }}>
+            <AuthContext.Provider value={{ user, loading, isLoggedIn: Boolean(user), refetchUser: checkAuth }}>
                   {children}
             </AuthContext.Provider>
       );

@@ -1,6 +1,6 @@
 export async function getCompanies() {
       try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_BASE_URL}/api/company`, {
+            const res = await fetch(`/api/company`, {
                   method: "GET",
                   credentials: "include",
             });

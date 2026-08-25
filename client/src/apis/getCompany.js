@@ -1,7 +1,7 @@
 export async function getCompany(name) {
       try {
             const encodedName = encodeURIComponent(name);
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_BASE_URL}/api/company/${encodedName}`, {
+            const res = await fetch(`/api/company/${encodedName}`, {
                   method: "GET",
                   credentials: "include",
             });

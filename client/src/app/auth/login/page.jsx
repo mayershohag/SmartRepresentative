@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import {
      Phone,
@@ -95,6 +96,7 @@ export default function Login() {
      const [remember, setRemember] = useState(false);
      const [submitting, setSubmitting] = useState(false);
      const [status, setStatus] = useState(null);
+     const { refetchUser } = useAuth();
 
      useEffect(() => {
           const saved = window.localStorage.getItem(REMEMBER_KEY);
@@ -169,10 +171,21 @@ export default function Login() {
                     window.localStorage.removeItem(REMEMBER_KEY);
                }
 
-               setStatus({ type: "ok", message: "Loggin in. Redirecting…" });
+               setStatus({
+                    type: "ok",
+                    message: "Login successful. Redirecting…",
+               });
                setForm((prev) => ({ ...prev, password: "" }));
-               setTimeout(() => navigate.push("/auth/profile"), 1200);
-               console.log(`login successfully!`);
+               const authenticated = await refetchUser();
+               if (!authenticated) {
+                    setStatus({
+                         type: "error",
+                         message: "Login succeeded, but authentication could not be verified.",
+                    });
+                    return;
+               }
+
+               navigate.push("/auth/profile");
           } catch (err) {
                setStatus({
                     type: "error",
