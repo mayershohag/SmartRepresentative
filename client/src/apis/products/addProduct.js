@@ -6,13 +6,13 @@ export async function addProduct(productData) {
                   headers: {
                         "Content-Type": "application/json",
                   },
-                  body: productData,
+                  credentials: "include",
+                  body: JSON.stringify(productData),
             });
             const data = await res.json();
-            console.log("Product added successfully!");
-            console.log(data);
+            return { status: res.status, ok: res.ok, data };
       } catch (error) {
             console.error("Error adding product:", error);
             throw error;
       }
-}
+}

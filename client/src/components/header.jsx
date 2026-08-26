@@ -19,7 +19,7 @@ const PAGE_META = {
           subtitle: "Organize your product catalog",
      },
      products: {
-          title: "Company Products",
+          title: "Products",
           subtitle: "Browse products from your companies",
      },
      "my-store": {
@@ -39,7 +39,11 @@ const PAGE_META = {
      },
 };
 
-export default function Header({ activeId = "dashboard", distributor, onMenuClick }) {
+export default function Header({
+     activeId = "dashboard",
+     distributor,
+     onMenuClick,
+}) {
      const [notifOpen, setNotifOpen] = useState(false);
      const meta = PAGE_META[activeId] ?? PAGE_META.dashboard;
      const { user } = useAuth();
@@ -73,9 +77,9 @@ export default function Header({ activeId = "dashboard", distributor, onMenuClic
           },
      ];
 
-      return (
-           <header className="sticky top-0 z-10 px-4 pt-6 pb-4 sm:px-6 lg:px-8">
-                <div className="glass-panel backdrop-blur-[3px] flex items-center gap-3 rounded-2xl px-3.5 py-3.5 sm:gap-4 sm:px-5">
+     return (
+          <header className="sticky top-0 z-10 px-4 pt-6 pb-4 sm:px-6 lg:px-8">
+               <div className="glass-panel backdrop-blur-[3px] flex items-center gap-3 rounded-2xl px-3.5 py-3.5 sm:gap-4 sm:px-5">
                     <button
                          type="button"
                          onClick={onMenuClick}
@@ -95,8 +99,8 @@ export default function Header({ activeId = "dashboard", distributor, onMenuClic
                          </p>
                     </div>
 
-                     {/* Search */}
-                     <div className="hidden sm:block">
+                    {/* Search */}
+                    <div className="hidden sm:block">
                          <div
                               className="flex w-65 items-center gap-2 rounded-xl px-3.5 py-2.5"
                               style={{
@@ -118,11 +122,11 @@ export default function Header({ activeId = "dashboard", distributor, onMenuClic
                     </div>
 
                     {/* Quick add */}
-                     <Link
-                          href="/products/add"
-                          className="hidden items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.98] md:flex"
-                          style={{ background: "var(--thread)" }}
-                     >
+                    <Link
+                         href="/products/add"
+                         className="hidden items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.98] md:flex"
+                         style={{ background: "var(--thread)" }}
+                    >
                          <Plus size={16} strokeWidth={2.5} />
                          New Product
                     </Link>

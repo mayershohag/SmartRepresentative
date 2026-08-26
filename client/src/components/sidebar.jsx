@@ -100,28 +100,26 @@ const NAV_SECTIONS = [
                },
                {
                     id: "products",
-                    label: "Company Products",
+                    label: "Products",
                     icon: Package,
                     children: [
                          {
                               id: "products:add",
                               label: "Add Product",
                               icon: Plus,
+                              href: "/products/add",
                          },
                          {
                               id: "products:list",
                               label: "All Products",
                               icon: List,
+                              href: "/products",
                          },
                          {
                               id: "products:update",
                               label: "Update Product",
                               icon: Pencil,
-                         },
-                         {
-                              id: "products:delete",
-                              label: "Delete Product",
-                              icon: Trash2,
+                              href: "/products/update",
                          },
                     ],
                },
@@ -454,17 +452,17 @@ export default function Sidebar({
                     willChange: mobile ? "transform" : "auto",
                }}
           >
-                <div
-                     className="glass-panel relative flex h-full flex-col rounded-r-3xl"
-                     style={{
-                          borderLeft: "none",
-                          background:
-                               "linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.03) 100%)",
-                          paddingBottom: mobile
-                               ? "env(safe-area-inset-bottom, 0px)"
-                               : undefined,
-                     }}
-                >
+               <div
+                    className="glass-panel relative flex h-full flex-col rounded-r-3xl"
+                    style={{
+                         borderLeft: "none",
+                         background:
+                              "linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.03) 100%)",
+                         paddingBottom: mobile
+                              ? "env(safe-area-inset-bottom, 0px)"
+                              : undefined,
+                    }}
+               >
                     <div
                          className="absolute right-0 top-8 bottom-8 w-0.5 rounded-full opacity-70"
                          style={{ background: "var(--thread)" }}
@@ -550,33 +548,35 @@ export default function Sidebar({
                          className="border-t px-3 py-4"
                          style={{ borderColor: "var(--glass-border)" }}
                     >
-                         {!mobile && <button
-                              type="button"
-                              onClick={handleCollapseToggle}
-                              className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
-                                   collapsed ? "justify-center px-0" : ""
-                              }`}
-                              style={{ color: "var(--text-secondary)" }}
-                              onMouseEnter={(e) => {
-                                   e.currentTarget.style.background =
-                                        "var(--glass-fill-hover)";
-                                   e.currentTarget.style.color =
-                                        "var(--text-primary)";
-                              }}
-                              onMouseLeave={(e) => {
-                                   e.currentTarget.style.background =
-                                        "transparent";
-                                   e.currentTarget.style.color =
-                                        "var(--text-secondary)";
-                              }}
-                         >
-                              {collapsed ? (
-                                   <ChevronsRight size={18} />
-                              ) : (
-                                   <ChevronsLeft size={18} />
-                              )}
-                              {!collapsed && <span>Collapse</span>}
-                         </button>}
+                         {!mobile && (
+                              <button
+                                   type="button"
+                                   onClick={handleCollapseToggle}
+                                   className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
+                                        collapsed ? "justify-center px-0" : ""
+                                   }`}
+                                   style={{ color: "var(--text-secondary)" }}
+                                   onMouseEnter={(e) => {
+                                        e.currentTarget.style.background =
+                                             "var(--glass-fill-hover)";
+                                        e.currentTarget.style.color =
+                                             "var(--text-primary)";
+                                   }}
+                                   onMouseLeave={(e) => {
+                                        e.currentTarget.style.background =
+                                             "transparent";
+                                        e.currentTarget.style.color =
+                                             "var(--text-secondary)";
+                                   }}
+                              >
+                                   {collapsed ? (
+                                        <ChevronsRight size={18} />
+                                   ) : (
+                                        <ChevronsLeft size={18} />
+                                   )}
+                                   {!collapsed && <span>Collapse</span>}
+                              </button>
+                         )}
 
                          <button
                               type="button"
