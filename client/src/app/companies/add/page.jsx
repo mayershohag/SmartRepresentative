@@ -17,7 +17,7 @@ import {
      Activity,
      Loader2,
 } from "lucide-react";
-import { addCompany } from "@/apis/addCompany";
+import { addCompany } from "@/apis/company/addCompany";
 
 export default function AddCompany() {
      const router = useRouter();
@@ -236,17 +236,19 @@ export default function AddCompany() {
      }, [formData.logo]);
 
      return (
-          <main className="relative flex-1 px-6 pb-8 min-h-screen">
-               <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-                    <div
-                         className="absolute right-1/4 top-1/4 h-72 w-72 rounded-full opacity-10 blur-3xl"
-                         style={{ background: "var(--thread-pink)" }}
-                    />
-                    <div
-                         className="absolute left-1/3 bottom-1/4 h-80 w-80 rounded-full opacity-10 blur-3xl"
-                         style={{ background: "var(--thread-blue)" }}
-                    />
-               </div>
+           <main className="relative flex-1 px-4 pb-8 min-h-screen sm:px-6 lg:px-8">
+                <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+                     <div
+                          className="absolute right-1/4 top-1/4 h-72 w-72 rounded-full opacity-10 blur-3xl"
+                          style={{ background: "var(--thread-pink)" }}
+                     />
+                     <div
+                          className="absolute left-1/3 bottom-1/4 h-80 w-80 rounded-full opacity-10 blur-3xl"
+                          style={{ background: "var(--thread-blue)" }}
+                     />
+                </div>
+
+                <div className="mx-auto max-w-[1600px]">
 
                {/* Back button and page title */}
                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -921,7 +923,8 @@ export default function AddCompany() {
                               </form>
                          </motion.div>
                     )}
-               </AnimatePresence>
-          </main>
-     );
+                </AnimatePresence>
+                </div>
+           </main>
+      );
 }

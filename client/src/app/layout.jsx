@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
+import AppShell from "@/components/appShell";
 import { AuthProvider } from "@/context/authContext";
 
 const geistSans = Geist({
@@ -29,16 +28,9 @@ export default function RootLayout({ children }) {
                lang="en"
                className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
           >
-               <body className="min-h-full grid grid-cols-12 grid-rows-auto">
+               <body className="min-h-full">
                     <AuthProvider>
-                         <div className="hidden sm:block sm:col-span-2">
-                              <Sidebar />
-                         </div>
-
-                         <div className="col-span-12 sm:col-span-10">
-                              <Header />
-                              {children}
-                         </div>
+                         <AppShell>{children}</AppShell>
                     </AuthProvider>
                </body>
           </html>

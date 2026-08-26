@@ -16,7 +16,7 @@ import {
      AlertCircle,
      CircleCheck,
 } from "lucide-react";
-import { addUser } from "@/apis/addUser";
+import { register } from "@/apis/auth/register";
 import { useRouter } from "next/navigation";
 
 const PHONE_REGEX = /^(\+8801|01)[3-9]\d{8}$/;
@@ -253,7 +253,7 @@ export default function DistributionRegister() {
 
           try {
                setSubmitting(true);
-               const res = await addUser(payload);
+               const res = await register(payload);
                if (res.ok) {
                     setSubmitError("Registration Successful");
                }

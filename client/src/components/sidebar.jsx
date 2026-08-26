@@ -21,9 +21,10 @@ import {
      Trash2,
      List,
      ShoppingCart,
+     X,
 } from "lucide-react";
 import Link from "next/link";
-import Logout from "@/apis/logout";
+import Logout from "@/apis/auth/logout";
 import { useRouter } from "next/navigation";
 
 const NAV_SECTIONS = [
@@ -81,23 +82,19 @@ const NAV_SECTIONS = [
                               id: "categories:add",
                               label: "Add Category",
                               icon: Plus,
-                              href: "/add-category",
+                              href: "/category/add",
                          },
                          {
                               id: "categories:list",
                               label: "All Categories",
                               icon: List,
-                              href: "/categories",
+                              href: "/category",
                          },
                          {
                               id: "categories:update",
                               label: "Update Category",
                               icon: Pencil,
-                         },
-                         {
-                              id: "categories:delete",
-                              label: "Delete Category",
-                              icon: Trash2,
+                              href: "/category/update",
                          },
                     ],
                },
@@ -272,6 +269,7 @@ function NavBadge({ children }) {
 
 function NavItem({ item, collapsed, activeId, onNavigate, openId, setOpenId }) {
      const Icon = item.icon;
+     const router = useRouter();
      const hasChildren = Boolean(item.children?.length);
      const isOpen = openId === item.id;
      const isActive = activeId === item.id;
@@ -283,6 +281,7 @@ function NavItem({ item, collapsed, activeId, onNavigate, openId, setOpenId }) {
                setOpenId(isOpen ? null : item.id);
                return;
           }
+          if (item.href) router.push(item.href);
           onNavigate?.(item.id);
      };
 
@@ -426,7 +425,13 @@ function NavItem({ item, collapsed, activeId, onNavigate, openId, setOpenId }) {
      );
 }
 
-export default function Sidebar({ activeId = "dashboard", onNavigate }) {
+export default function Sidebar({
+     activeId = "dashboard",
+     onNavigate,
+     mobile = false,
+     isOpen = false,
+     onClose,
+}) {
      const [collapsed, setCollapsed] = useState(false);
      const [openId, setOpenId] = useState(null);
      const router = useRouter();
@@ -438,19 +443,28 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
 
      return (
           <aside
-               className={`sticky top-0 h-screen shrink-0 transition-all duration-300 ease-out ${
-                    collapsed ? "w-21" : "w-67"
-               }`}
-               style={{ zIndex: 20 }}
+               className={
+                    mobile
+                         ? `fixed inset-y-0 left-0 z-50 h-dvh w-72 max-w-[85vw] transition-transform duration-300 ease-out sm:hidden ${isOpen ? "translate-x-0" : "-translate-x-full"}`
+                         : `sticky top-0 h-screen shrink-0 transition-all duration-300 ease-out sm:w-56 md:w-60 lg:w-67 xl:w-72 ${collapsed ? "sm:w-18 md:w-20 lg:w-21" : ""}`
+               }
+               style={{
+                    zIndex: mobile ? 50 : 20,
+                    overscrollBehavior: "contain",
+                    willChange: mobile ? "transform" : "auto",
+               }}
           >
-               <div
-                    className="glass-panel relative flex h-full flex-col rounded-r-3xl"
-                    style={{
-                         borderLeft: "none",
-                         background:
-                              "linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.03) 100%)",
-                    }}
-               >
+                <div
+                     className="glass-panel relative flex h-full flex-col rounded-r-3xl"
+                     style={{
+                          borderLeft: "none",
+                          background:
+                               "linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.03) 100%)",
+                          paddingBottom: mobile
+                               ? "env(safe-area-inset-bottom, 0px)"
+                               : undefined,
+                     }}
+                >
                     <div
                          className="absolute right-0 top-8 bottom-8 w-0.5 rounded-full opacity-70"
                          style={{ background: "var(--thread)" }}
@@ -484,6 +498,16 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
                                    </p>
                               </div>
                          )}
+                         {mobile && (
+                              <button
+                                   type="button"
+                                   onClick={onClose}
+                                   aria-label="Close navigation menu"
+                                   className="ml-auto flex h-9 w-9 items-center justify-center rounded-xl text-(--text-secondary) transition-colors hover:bg-white/5 hover:text-(--text-primary)"
+                              >
+                                   <X size={18} />
+                              </button>
+                         )}
                     </div>
 
                     {/* Nav */}
@@ -507,7 +531,11 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
                                                   item={item}
                                                   collapsed={collapsed}
                                                   activeId={activeId}
-                                                  onNavigate={onNavigate}
+                                                  onNavigate={
+                                                       mobile
+                                                            ? () => onClose?.()
+                                                            : onNavigate
+                                                  }
                                                   openId={openId}
                                                   setOpenId={setOpenId}
                                              />
@@ -522,7 +550,7 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
                          className="border-t px-3 py-4"
                          style={{ borderColor: "var(--glass-border)" }}
                     >
-                         <button
+                         {!mobile && <button
                               type="button"
                               onClick={handleCollapseToggle}
                               className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
@@ -548,7 +576,7 @@ export default function Sidebar({ activeId = "dashboard", onNavigate }) {
                                    <ChevronsLeft size={18} />
                               )}
                               {!collapsed && <span>Collapse</span>}
-                         </button>
+                         </button>}
 
                          <button
                               type="button"

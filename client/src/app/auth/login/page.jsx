@@ -16,7 +16,7 @@ import {
      ShieldCheck,
      Check,
 } from "lucide-react";
-import { loginUser } from "@/apis/loginUser";
+import { loginUser } from "@/apis/auth/loginUser";
 
 const PHONE_REGEX = /^(\+8801|01)[3-9]\d{8}$/;
 

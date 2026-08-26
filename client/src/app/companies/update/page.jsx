@@ -16,8 +16,8 @@ import {
      Search,
      Save,
 } from "lucide-react";
-import { getCompany } from "@/apis/getCompany";
-import { updateCompany } from "@/apis/updateCompany";
+import { getCompany } from "@/apis/company/getCompany";
+import { updateCompany } from "@/apis/company/updateCompany";
 import Image from "next/image";
 
 const EMPTY_FORM = {
@@ -143,13 +143,13 @@ export default function UpdateCompany() {
      const hasCompany = Boolean(originalName);
 
      return (
-          <main className="relative min-h-screen flex-1 px-6 pb-10">
-               <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-                    <div className="absolute -right-20 top-8 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl" />
-                    <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl" />
-               </div>
+           <main className="relative min-h-screen flex-1 px-4 pb-10 sm:px-6 lg:px-8">
+                <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+                     <div className="absolute -right-20 top-8 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl" />
+                     <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl" />
+                </div>
 
-               <div className="mb-6 flex flex-col gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+                <div className="mx-auto max-w-[1600px]">
                     <div className="flex items-start gap-3">
                          <Link
                               href="/companies"
@@ -170,10 +170,8 @@ export default function UpdateCompany() {
                                    details with confidence.
                               </p>
                          </div>
-                    </div>
-               </div>
-
-               <section className="glass-panel mb-5 rounded-2xl p-4 sm:p-5">
+                     </div>
+                <section className="glass-panel mb-5 rounded-2xl p-4 sm:p-5">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                          <div>
                               <div className="flex items-center gap-2 text-[13px] font-semibold text-(--text-primary)">
@@ -469,10 +467,11 @@ export default function UpdateCompany() {
                               Search for a company by name above. Its current
                               details will appear here for editing.
                          </p>
-                    </section>
-               )}
-          </main>
-     );
+                     </section>
+                )}
+                </div>
+           </main>
+      );
 }
 
 function Field({

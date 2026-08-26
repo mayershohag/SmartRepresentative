@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Bell, ChevronDown, Plus } from "lucide-react";
+import { Search, Bell, ChevronDown, Menu, Plus } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/authContext";
 
@@ -39,7 +39,7 @@ const PAGE_META = {
      },
 };
 
-export default function Header({ activeId = "dashboard", distributor }) {
+export default function Header({ activeId = "dashboard", distributor, onMenuClick }) {
      const [notifOpen, setNotifOpen] = useState(false);
      const meta = PAGE_META[activeId] ?? PAGE_META.dashboard;
      const { user } = useAuth();
@@ -73,9 +73,18 @@ export default function Header({ activeId = "dashboard", distributor }) {
           },
      ];
 
-     return (
-          <header className="sticky top-0 z-10 px-6 pt-6 pb-4">
-               <div className="glass-panel backdrop-blur-[3px] flex items-center gap-4 rounded-2xl px-5 py-3.5">
+      return (
+           <header className="sticky top-0 z-10 px-4 pt-6 pb-4 sm:px-6 lg:px-8">
+                <div className="glass-panel backdrop-blur-[3px] flex items-center gap-3 rounded-2xl px-3.5 py-3.5 sm:gap-4 sm:px-5">
+                    <button
+                         type="button"
+                         onClick={onMenuClick}
+                         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border text-(--text-secondary) transition-colors hover:bg-white/5 hover:text-(--text-primary) sm:hidden"
+                         style={{ borderColor: "var(--glass-border)" }}
+                         aria-label="Open navigation menu"
+                    >
+                         <Menu size={19} />
+                    </button>
                     {/* Page title */}
                     <div className="min-w-0 flex-1">
                          <h1 className="font-display truncate text-[19px] font-semibold leading-none text-(--text-primary">
@@ -86,8 +95,8 @@ export default function Header({ activeId = "dashboard", distributor }) {
                          </p>
                     </div>
 
-                    {/* Search */}
-                    <div className="hidden md:block">
+                     {/* Search */}
+                     <div className="hidden sm:block">
                          <div
                               className="flex w-65 items-center gap-2 rounded-xl px-3.5 py-2.5"
                               style={{
@@ -109,11 +118,11 @@ export default function Header({ activeId = "dashboard", distributor }) {
                     </div>
 
                     {/* Quick add */}
-                    <Link
-                         href="/products/add"
-                         className="hidden items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.98] lg:flex"
-                         style={{ background: "var(--thread)" }}
-                    >
+                     <Link
+                          href="/products/add"
+                          className="hidden items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.98] md:flex"
+                          style={{ background: "var(--thread)" }}
+                     >
                          <Plus size={16} strokeWidth={2.5} />
                          New Product
                     </Link>
