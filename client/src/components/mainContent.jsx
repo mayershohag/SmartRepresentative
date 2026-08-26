@@ -114,11 +114,7 @@ const STATUS_STYLES = {
      },
 };
 
-/* ---------- Component ---------- */
-
-export default function MainContent({
-     distributorName = "Rafiq Distribution House",
-}) {
+export default function MainContent() {
      return (
           <main className="relative flex-1 px-6 pb-8">
                {/* Stat cards */}

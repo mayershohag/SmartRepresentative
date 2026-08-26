@@ -482,7 +482,7 @@ export default function AddCompany() {
                                                                  disabled={
                                                                       loading
                                                                  }
-                                                                 className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet) transition-all duration-200`}
+                                                                 className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border border-(--glass-border) focus:ring-1 focus:ring-(--thread-violet) transition-all duration-200`}
                                                             />
                                                        </div>
                                                        {/* Mini live logo preview */}
@@ -541,7 +541,7 @@ export default function AddCompany() {
                                                             rows={4}
                                                             placeholder="Brief details about the company, main supplier contacts, catalog details..."
                                                             disabled={loading}
-                                                            className="w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet) transition-all duration-200 resize-none"
+                                                            className="w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border border-(--glass-border) focus:ring-1 focus:ring-(--thread-violet) transition-all duration-200 resize-none"
                                                        />
                                                   </div>
                                              </div>
@@ -593,8 +593,8 @@ export default function AddCompany() {
                                                             className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border transition-all duration-200 ${
                                                                  touched.phone &&
                                                                  errors.phone
-                                                                      ? "border-(--danger) focus:border-(--danger) focus:ring-1 focus:ring-(--danger)"
-                                                                      : "border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet)"
+                                                                      ? "border-(--danger)  focus:ring-1 focus:ring-(--danger)"
+                                                                      : "border-(--glass-border) focus:ring-1 focus:ring-(--thread-violet)"
                                                             }`}
                                                        />
                                                   </div>
@@ -654,8 +654,8 @@ export default function AddCompany() {
                                                             className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border transition-all duration-200 ${
                                                                  touched.email &&
                                                                  errors.email
-                                                                      ? "border-(--danger) focus:border-(--danger) focus:ring-1 focus:ring-(--danger)"
-                                                                      : "border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet)"
+                                                                      ? "border-(--danger) focus:ring-1 focus:ring-(--danger)"
+                                                                      : "border-(--glass-border) focus:ring-1 focus:ring-(--thread-violet)"
                                                             }`}
                                                        />
                                                   </div>
@@ -715,8 +715,8 @@ export default function AddCompany() {
                                                             className={`w-full rounded-xl bg-white/3 px-4 py-2.5 text-[13.5px] text-(--text-primary) outline-none border transition-all duration-200 ${
                                                                  touched.website &&
                                                                  errors.website
-                                                                      ? "border-(--danger) focus:border-(--danger) focus:ring-1 focus:ring-(--danger)"
-                                                                      : "border-(--glass-border) focus:border-(--thread-violet) focus:ring-1 focus:ring-(--thread-violet)"
+                                                                      ? "border-(--danger) focus:ring-1 focus:ring-(--danger)"
+                                                                      : "border-(--glass-border) focus:ring-1 focus:ring-(--thread-violet)"
                                                             }`}
                                                        />
                                                   </div>
