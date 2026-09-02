@@ -35,9 +35,9 @@ app.use(cookieParser())
 // routes 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
-app.use("/api/company", companyRouter);
+app.use("/api/companies", companyRouter);
 app.use("/api/products", productRouter);
-app.use("/api/category", categoryRouter);
+app.use("/api/categories", categoryRouter);
 app.use("/api/distributor-products", distributorRouter);
 
 // configuration
@@ -65,9 +65,9 @@ app.get("/", (req, res) => {
             routes: {
                   auth: "/api/auth",
                   users: "/api/users",
-                  company: "/api/company",
+                  company: "/api/companies",
                   products: "/api/products",
-                  category: "/api/category",
+                  category: "/api/categories",
                   distributorProducts: "/api/distributor-products",
             }
       })

@@ -1,20 +1,21 @@
-const User = require("../../models/user.model.js");
+const Distributor = require("../../../models/roleBaseUser/distributor.model.js");
 const { hash } = require("bcrypt");
-const registerAuth = async (req, res) => {
+const distributorRegister = async (req, res) => {
       try {
             const {
                   name,
                   email,
                   password,
                   photo,
-                  bio,
+                  companies,
                   businessName,
                   tradeLicense,
                   nid,
                   district,
                   address,
-                  isActive,
+                  activeStatus,
                   phone,
+                  role
             } = req.body;
 
             if (
@@ -24,6 +25,7 @@ const registerAuth = async (req, res) => {
                   !businessName ||
                   !tradeLicense ||
                   !nid ||
+                  !companies ||
                   !district
             ) {
                   return res.status(400).json({
@@ -31,9 +33,9 @@ const registerAuth = async (req, res) => {
                         message: "all fields are required!",
                   });
             }
-            const phoneChecking = await User.findOne({ phone });
-            const nidChecking = await User.findOne({ nid });
-            const tradeLicenseChecking = await User.findOne({ tradeLicense });
+            const phoneChecking = await Distributor.findOne({ phone });
+            const nidChecking = await Distributor.findOne({ nid });
+            const tradeLicenseChecking = await Distributor.findOne({ tradeLicense });
             const hashedPassword = await hash(password, 12);
 
             if (phoneChecking) {
@@ -55,31 +57,32 @@ const registerAuth = async (req, res) => {
                   });
             }
 
-            const user = new User({
+            const distributor = new Distributor({
                   name,
                   email,
                   photo,
-                  bio,
                   businessName,
                   tradeLicense,
                   nid,
                   district,
                   address,
-                  isActive,
+                  activeStatus,
+                  companies,
                   phone,
                   password: hashedPassword,
+                  role
             });
-            await user.save();
+            await distributor.save();
             res.status(201).json({
                   success: true,
-                  message: "User created Successfully!",
+                  message: "Distributor user created Successfully!",
             });
       } catch (err) {
             console.log(err);
             res.status(500).json({
                   success: false,
-                  message: "User creation failed.",
+                  message: "Distributor user creation failed.",
             });
       }
 };
-module.exports = registerAuth;
+module.exports = distributorRegister;

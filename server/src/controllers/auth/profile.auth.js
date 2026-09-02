@@ -1,7 +1,5 @@
-const User = require('../../models/user.model')
+const User = require('../../models/roleBaseUser/distributor.model')
 
-// authValidator has already verified the cookie and put the decoded token
-// payload on req.user by the time this runs.
 const getProfile = async (req, res) => {
       try {
             const user = await User.findById(req.user.userId).select('-password')

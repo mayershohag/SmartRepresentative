@@ -5,11 +5,13 @@ const getProducts = require("../controllers/product/getProducts");
 const getProduct = require("../controllers/product/getProduct");
 const updateProduct = require("../controllers/product/updateProduct");
 const deleteProduct = require("../controllers/product/deleteProduct");
+const authValidator = require("../middlewares/common/authValidator");
+const roleChecker = require("../middlewares/common/roleChecker");
 
-productRouter.post("/", createProduct);
-productRouter.get("/", getProducts);
-productRouter.get("/:productId", getProduct);
-productRouter.put("/:productId", updateProduct);
-productRouter.delete("/:productId", deleteProduct);
+productRouter.post("/", authValidator, roleChecker, createProduct);
+productRouter.get("/", authValidator, roleChecker, getProducts);
+productRouter.get("/:productId", authValidator, roleChecker, getProduct);
+productRouter.put("/:productId", authValidator, roleChecker, updateProduct);
+productRouter.delete("/:productId", authValidator, roleChecker, deleteProduct);
 
 module.exports = productRouter;

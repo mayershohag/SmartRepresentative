@@ -1,7 +1,7 @@
 const roleChecker = async (req, res, next) => {
       try {
             const { role } = req.user;
-            if (role === "distributor") {
+            if (role === "Super Admin") {
                   next()
             }
             else {
