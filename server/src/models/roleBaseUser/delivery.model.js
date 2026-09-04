@@ -69,7 +69,7 @@ const deliveryManSchema = new mongoose.Schema(
             activeStatus: {
                   type: String,
                   enum: ["Active", "Inactive"],
-                  default: "Active",
+                  default: "Inactive",
             },
       },
       { timestamps: true }

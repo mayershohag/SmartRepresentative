@@ -52,7 +52,7 @@ const distributorSchema = new mongoose.Schema(
             activeStatus: {
                   type: String,
                   enum: ["Inactive", "Active"],
-                  default: "Active",
+                  default: "Inactive",
             },
             phone: {
                   type: String,
