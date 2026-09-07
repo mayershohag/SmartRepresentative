@@ -11,7 +11,7 @@ const roleChecker = require("../middlewares/common/roleChecker");
 
 
 companyRouter.post("/", authValidator, roleChecker, createCompany);
-companyRouter.get("/", authValidator, roleChecker, getCompanies);
+companyRouter.get("/", getCompanies);
 companyRouter.get("/:name", authValidator, roleChecker, getCompany);
 companyRouter.put("/:name", authValidator, roleChecker, updateCompany);
 companyRouter.delete("/:name", authValidator, roleChecker, deleteCompany);

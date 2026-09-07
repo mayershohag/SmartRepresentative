@@ -40,7 +40,7 @@ const superAdminSchema = new mongoose.Schema(
             },
             role: {
                   type: String,
-                  default: "Super_Admin"
+                  default: "super-admin"
             },
             permissions: {
                   type: [String],
