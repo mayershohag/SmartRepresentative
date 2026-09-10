@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Distributor = require("../../models/roleBaseUser/distributor.model.js");
 const SuperAdmin = require("../../models/roleBaseUser/admin.model.js");
-const DeliveryMan = require("../../models/roleBaseUser/delivery.model.js");
+const DeliveryMan = require("../../models/roleBaseUser/deliveryman.model.js");
 const Shopkeeper = require("../../models/roleBaseUser/shopkeeper.model.js");
 
 const { cookieOptions, TOKEN_MAX_AGE_MS } = require("../../utils/cookie.js");
@@ -17,7 +17,7 @@ const config = {
 const loginAuth = async (req, res) => {
       try {
             const rolePath = req.url.replace(/^\/+|\/+$/g, "").split("/");
-            const validRoles = ["distributor", "admin", "delivery", "shopkeeper"];
+            const validRoles = ["distributor", "admin", "deliveryman", "shopkeeper"];
             const role = rolePath.find((segment) => validRoles.includes(segment.toLowerCase()));
             const { phone, password } = req.body;
             let user;
@@ -29,7 +29,7 @@ const loginAuth = async (req, res) => {
                   case "admin":
                         user = await SuperAdmin.findOne({ phone }).select("+password");
                         break;
-                  case "delivery":
+                  case "deliveryman":
                         user = await DeliveryMan.findOne({ phone }).select("+password");
                         break;
                   case "shopkeeper":

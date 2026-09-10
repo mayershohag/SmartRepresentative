@@ -1,41 +1,38 @@
-const Distributor = require("../../../models/roleBaseUser/distributor.model");
+const DeliveryMan = require("../../../models/roleBaseUser/deliveryman.model");
 const { hash } = require("bcrypt");
-const distributorRegister = async (req, res) => {
+const deliverymanRegister = async (req, res) => {
       try {
             const {
                   name,
-                  email,
+                  phone,
                   password,
-                  photo,
-                  companies,
-                  businessName,
-                  tradeLicense,
                   nid,
-                  district,
+                  distributorId,
+                  companies,
+                  vehicleType,
+                  vehicleNumber,
+                  photo,
+                  role,
                   address,
                   activeStatus,
-                  phone,
-                  role
             } = req.body;
 
             if (
                   !name ||
                   !phone ||
                   !password ||
-                  !businessName ||
-                  !tradeLicense ||
-                  !nid ||
+                  !distributorId ||
                   !companies ||
-                  !district
+                  !nid ||
+                  !companies
             ) {
                   return res.status(400).json({
                         success: false,
                         message: "all fields are required!",
                   });
             }
-            const phoneChecking = await Distributor.findOne({ phone });
-            const nidChecking = await Distributor.findOne({ nid });
-            const tradeLicenseChecking = await Distributor.findOne({ tradeLicense });
+            const phoneChecking = await DeliveryMan.findOne({ phone });
+            const nidChecking = await DeliveryMan.findOne({ nid });
             const hashedPassword = await hash(password, 12);
 
             if (phoneChecking) {
@@ -50,39 +47,32 @@ const distributorRegister = async (req, res) => {
                         message: "NID already exists.",
                   });
             }
-            if (tradeLicenseChecking) {
-                  return res.status(409).json({
-                        success: false,
-                        message: "Trade License already exists.",
-                  });
-            }
 
-            const distributor = new Distributor({
+            const deliveryMan = new DeliveryMan({
                   name,
-                  email,
-                  photo,
-                  businessName,
-                  tradeLicense,
+                  phone,
                   nid,
-                  district,
+                  distributorId,
+                  companies,
+                  vehicleType,
+                  vehicleNumber,
+                  photo,
+                  role,
                   address,
                   activeStatus,
-                  companies,
-                  phone,
                   password: hashedPassword,
-                  role
             });
-            await distributor.save();
+            await deliveryMan.save();
             res.status(201).json({
                   success: true,
-                  message: "Distributor user created Successfully!",
+                  message: "Delivery man account created Successfully!",
             });
       } catch (err) {
             console.log(err);
             res.status(500).json({
                   success: false,
-                  message: "Distributor user creation failed.",
+                  message: "delivery man account creation failed.",
             });
       }
 };
-module.exports = distributorRegister;
+module.exports = deliverymanRegister;

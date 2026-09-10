@@ -1,4 +1,4 @@
-Project Name: Smart Representative
+**Project Name: Smart Representative**
 
 
 
@@ -10,102 +10,87 @@ This is a B2B Project called Smart Representative. Which is solve the real world
 
 1\. A Shopkeeper can order products from distributors easily by their mobile app.
 
-
-
 2\. Distributor can see total orders today, which shop ordered the distributors products. The delivery man also can see the orders for deliver products a day later.
-
-
 
 3\. Distributor can see his total pricing cost, total products, total expenses, total delivery etc. All expenses tracked by the app.
 
-
-
 4\. Distributor can play with products like, create, read, delete, update products.
-
-
 
 5\. A Distributor can add companies by adding their names.
 
-
-
 6\. Shopkeeper also tracked expenses by the app.
-
-
 
 7\. For the reason Sales Representative works could be decrease.
 
 
 
-**Register An Account!:**
+**RBAC - Role Based Access Control:**
 
-1. By default, you can create a distributor account. there are some required fields like, name, business name, trade license, NID, district, phone, password etc. and also have some optional fields like email, photo, bio, isActive, address etc.
-
-
-
-**Login the Account!:**
-
-1. After successfully register an account! you can login that account by submitting correct phone number and password.
-
-
-
-&#x20;
-
-**Super Admin Access:**
-
-1. Super Admin can see the total users of the application by fetching users collections.
-2. also can see a particular user by fetching their user id.
-
-3\. Super Admin can update user details by fetching their user id.
-
-4\. also delete the user by fetching their user id.
+1. Distributor:
+Distributor can order The products from the companies. A distributor can collaborate multiple companies. distributor has some menu's in the sidebar. Which is Dashboard, Companies, Products, Store, Stock, Expense etc.
+2. Delivery Man:
+Delivery Man can see todays order which need to delivery to the shopkeeper and also can see the routes, shop location, etc.
+3. Shopkeeper:
+Shopkeeper will See the products, which is needs to orders, company, expense, etc.
+4. Super Admin:
+Super Admin will have super power to play with customization, a super admin can create, delete, update, read the products and also see the total companies, distributors, deliveryman, shops. also have permission, like a distributor create an account. The distributor account is inactive when super admin make it active then distributor can access all content.
 
 
 
-**Distributor:**
+**Frontend Workflow:**
 
-1. Distributor will have an expense dashboard. Where he can see everything like orders, products, cost, pending order, delivered orders etc.
-2. He can update and delete his profile anytime.
-3. He can see delivery man reports.
-4. He can create a collaborated companies. read company products, update and delete the collaborated companies. and also read a particular company.
-5. Distributor can create, read all products, a particular product, update and delete products. The Distributor will have the power to do it.
-6. also create a category for company products list.
-7. distributor can add to card products from companies which is available stock and that products will be added into distributor products list. distributor has full power to create, read, update, and delete the products from distributor products collections.
+The site visitor firstly see the Role Selection Page, after choosing user role then comes to the login page, the login page are same for every role but request APIs are different. In the login page also have their role based register button for signing up.
 
 
 
-**How to create a company:**
-If you're a distributor you can create an company which is collaborated with you. 
-
-1. You should must be fill the required fields of these are Name, Phone and also have some optional fields like, logo, description, website url, email, etc. 
-2. after filling the form you should click the submit button. 
+alright, after successfully login the user visit their dashboard content, no others role can be accessible for selected role. assume I'm a distributor I can see the sidebar content like, dashboard, companies, products, store, stock, expense etc. But others role content will can't see role content. just like all role are working.
 
 
 
-**How to create a products:** 
+***complete task:***
 
-If you're a distributor you can add a product for the company. after that you can add your own collections, that means, If the product didn't exists in your collaborated company. then you add the product and cart it to get your store. 
-
-1. first of all, you should select a company that define which company product you want to add or create. 
-2. then you should select the category of the product. 
-3. shortly after that, fill some these fields like, Name which is must, sku, barcode, image, description, unit, unit Value, status etc.
+1. I have created RoleSelectionPage for the front of view for the user.
+2. then I have created register form page for distributor role.
+3. Login form page are created for all users role. 
 
 
 
-**How to create a category of products:** 
-If you're a distributor you can create products category before creating products. 
+***pending task:***
 
-1. simple you can place a category name of products which is required. 
-2. then optionally add description and image.
+1. A deliveryman register form page need to access all distributor and companies routes.
+2. A shopkeeper register form page.
+3. A Super Admin register form page.
+4. 
 
 
 
-**How to create Distributor Products:**
-as a distributor you must need products from company that you can serve shopkeepers. so, 
+**Backend Workflow:**
 
-1. you should select distributor id. 
-2. shortly after that select which product you want to add to your store. 
-3. then purchase price, selling price, stock, minimumOrderQuantity, MaximumOrderQuantity, discount etc. 
-4. submit the form. 
 
-&#x20;
+
+***complete task:***
+
+1. I'm done, Distributors APIs are ready to serve. Now, accessible user can access distributor and do CRUD. 
+
+
+
+***pending task:***
+
+1. frontend needs distributor, shopkeeper, deliveryman APIs ready.
+
+
+
+
+
+**Problems:** need to resolve deliveryman and delivery issues
+
+
+
+
+
+
+
+
+
+
 

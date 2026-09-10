@@ -6,15 +6,18 @@ const cookieParser = require("cookie-parser")
 const cors = require("cors")
 
 const authRouter = require("./src/routes/auth.routes");
-const userRouter = require("./src/routes/users.routes");
 const companyRouter = require("./src/routes/company.routes");
 const productRouter = require("./src/routes/product.routes");
 const categoryRouter = require("./src/routes/category.routes");
-const distributorRouter = require("./src/routes/distributor.routes");
+const distributorProductsRouter = require("./src/routes/distributorProducts.routes");
+
+// users role based dependencies
+const distributorRouter = require("./src/routes/users/distributor.routes");
+const shopkeeperRouter = require("./src/routes/users/shopkeeper.routes");
+const deliverymanRouter = require("./src/routes/users/deliveryman.routes");
+const adminRouter = require("./src/routes/users/admin.routes");
 
 const app = express();
-
-
 
 // CORS
 app.use(
@@ -36,11 +39,16 @@ app.use(cookieParser())
 
 // routes 
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
 app.use("/api/companies", companyRouter);
 app.use("/api/products", productRouter);
 app.use("/api/categories", categoryRouter);
-app.use("/api/distributor-products", distributorRouter);
+app.use("/api/distributor-products", distributorProductsRouter);
+
+// users role base routing
+app.use("/api/distributors", distributorRouter);
+app.use("/api/shopkeepers", shopkeeperRouter);
+app.use("/api/deliveryman", deliverymanRouter);
+app.use("/api/admin", adminRouter);
 
 // configuration
 dotenv.config();
@@ -71,6 +79,10 @@ app.get("/", (req, res) => {
                   products: "/api/products",
                   category: "/api/categories",
                   distributorProducts: "/api/distributor-products",
+                  distributor: "/api/distributors",
+                  shopkeeper: "/api/shopkeepers",
+                  deliveryman: "/api/deliveryman",
+                  admin: "/api/admin",
             }
       })
 });

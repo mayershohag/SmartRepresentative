@@ -8,7 +8,7 @@ const authValidator = require("../middlewares/common/authValidator");
 const distributorRegister = require("../controllers/auth/distributor/register.auth");
 const superAdminRegister = require("../controllers/auth/superAdmin/register.auth");
 const shopkeeperRegister = require("../controllers/auth/shopkeeper/register.auth");
-const deliveryRegister = require("../controllers/auth/delivery/register.auth");
+const deliverymanRegister = require("../controllers/auth/deliveryman/register.auth");
 
 // middlewares
 authRouter.use(express.json());
@@ -26,8 +26,8 @@ authRouter.post("/admin/register", superAdminRegister)
 authRouter.post("/admin/login", loginAuth)
 
 // delivery api routes 
-authRouter.post("/delivery/register", deliveryRegister)
-authRouter.post("/delivery/login", loginAuth)
+authRouter.post("/deliveryman/register", deliverymanRegister)
+authRouter.post("/deliveryman/login", loginAuth)
 
 // shopkeeper api routes 
 authRouter.post("/shopkeeper/register", shopkeeperRegister)
