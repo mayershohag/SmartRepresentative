@@ -19,6 +19,13 @@ const companySchema = new mongoose.Schema(
                   default: "",
             },
 
+            distributors: [
+                  {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "Distributor",
+                  },
+            ],
+
             website: {
                   type: String,
                   default: "",
