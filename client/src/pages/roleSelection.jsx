@@ -29,7 +29,7 @@ export default function RoleSelection() {
                ],
           },
           {
-               id: "delivery",
+               id: "deliveryman",
                title: "Delivery Man",
                href: `${selectedRole}/auth/login`,
                icon: Truck,

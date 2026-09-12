@@ -1,12 +1,12 @@
 export const getDistributors = async () => {
       try {
             const response = await fetch(`https://smartrepresentative.onrender.com/api/distributors`);
-            const data = await response.json();
-            const { distributors } = data;
+            const distributorData = await response.json();
+            const { data } = distributorData;
             return {
                   status: response.status,
                   ok: response.ok,
-                  data: distributors,
+                  data,
             };
       }
       catch (err) {

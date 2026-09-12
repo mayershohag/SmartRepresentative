@@ -24,6 +24,7 @@ import {
      EyeOff,
      Building2,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function DistributorRegister() {
      const [currentStep, setCurrentStep] = useState(1);
@@ -52,6 +53,16 @@ export default function DistributorRegister() {
      const [showConfirmPassword, setShowConfirmPassword] = useState(false);
      const [availableCompanies, setAvailableCompanies] = useState([]);
      const [fetchingCompanies, setFetchingCompanies] = useState(false);
+     const roleSet = usePathname().split("/");
+     const allowedRole = [
+          "super-admin",
+          "distributor",
+          "deliveryman",
+          "shopkeeper",
+     ];
+     const role = roleSet
+          .filter((item) => allowedRole.includes(item))
+          .toString();
 
      useEffect(() => {
           const fetchCompanies = async () => {
@@ -337,10 +348,10 @@ export default function DistributorRegister() {
                               dashboard.
                          </p>
                          <Link
-                              href="/auth/login"
+                              href={`/${role}/auth/login`}
                               className="block w-full py-4 px-4 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-orange-200"
                          >
-                              Go to Dashboard
+                              Go to Login
                          </Link>
                     </div>
                </div>
@@ -936,10 +947,10 @@ export default function DistributorRegister() {
                               <p className="text-gray-500">
                                    Already have an account?{" "}
                                    <Link
-                                        href="/login"
+                                        href={`/${role}/auth/login`}
                                         className="font-semibold text-orange-600 hover:text-orange-500 hover:underline underline-offset-4 transition-all"
                                    >
-                                        Sign in to dashboard
+                                        Login to dashboard
                                    </Link>
                               </p>
                          </div>

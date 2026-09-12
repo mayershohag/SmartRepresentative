@@ -8,7 +8,6 @@ export const Register = async (credentials, role = "distributor") => {
                   body: JSON.stringify(credentials),
             });
             const data = await response.json();
-            console.log(data);
             return {
                   status: response.status,
                   ok: response.ok,

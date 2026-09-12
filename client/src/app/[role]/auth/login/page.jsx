@@ -18,7 +18,7 @@ export default function LoginPage() {
      const allowedRole = [
           "super-admin",
           "distributor",
-          "delivery",
+          "deliveryman",
           "shopkeeper",
      ];
      const roleSet = usePathname().split("/");
@@ -74,12 +74,6 @@ export default function LoginPage() {
                );
 
                if (response.ok) {
-                    if (response.data?.user) {
-                         localStorage.setItem(
-                              "user",
-                              JSON.stringify(response.data.user),
-                         );
-                    }
                     navigate.push(`/${role}/dashboard`);
                } else {
                     setError(
