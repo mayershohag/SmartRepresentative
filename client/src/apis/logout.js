@@ -1,17 +1,9 @@
 const BASE_AUTH_URL = "https://smartrepresentative.onrender.com/api/auth";
-
- const login = async (credentials, role = "distributor") => {
-      if(role === "super-admin"){
-            role = "admin"
-      }
+const logout = async () => {
       try {
-            const response = await fetch(`${BASE_AUTH_URL}/${role}/login`, {
+            const response = await fetch(`${BASE_AUTH_URL}/logout`, {
                   method: "POST",
-                  headers: {
-                        "Content-Type": "application/json",
-                  },
                   credentials: "include",
-                  body: JSON.stringify(credentials),
             });
             const data = await response.json();
             return {
@@ -19,16 +11,14 @@ const BASE_AUTH_URL = "https://smartrepresentative.onrender.com/api/auth";
                   ok: response.ok,
                   data,
             };
-      }
-      catch (err) {
+      } catch (err) {
             console.log(err);
             return {
                   status: 400,
                   ok: false,
                   err,
-            }
+            };
       }
 };
 
-
-export default login
+export default logout

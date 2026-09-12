@@ -11,10 +11,12 @@ import {
      EyeOff,
      ArrowRight,
 } from "lucide-react";
-import { login } from "@/apis/login";
+import login from "@/apis/login";
+import { useUserContext } from "@/context/userContext";
 
 export default function LoginPage() {
      const navigate = useRouter();
+     const { setUser, setIsLogin } = useUserContext();
      const allowedRole = [
           "super-admin",
           "distributor",
@@ -74,6 +76,10 @@ export default function LoginPage() {
                );
 
                if (response.ok) {
+                    if (response.data?.user) {
+                         setUser(response.data.user);
+                    }
+                    setIsLogin(true);
                     navigate.push(`/${role}/dashboard`);
                } else {
                     setError(

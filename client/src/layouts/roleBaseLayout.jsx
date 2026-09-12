@@ -7,7 +7,15 @@ import { useUserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 
 const RoleBasedLayout = () => {
-     const { user } = useUserContext();
+     const { user, isLogin, loading } = useUserContext();
+
+     if (loading) {
+          return null;
+     }
+
+     if (!isLogin || !user) {
+          return null;
+     }
 
      switch (user.role) {
           case "super-admin":
@@ -23,7 +31,7 @@ const RoleBasedLayout = () => {
                return <DeliverymanLayout />;
 
           default:
-          //    return navigate.push("/login");
+               return null;
      }
 };
 
